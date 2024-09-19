@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es6",                  // La versión de JavaScript a la que se compilará el código TypeScript
+    "module": "commonjs",             // El sistema de módulos a usar
+    "outDir": "./dist",               // Carpeta de salida para los archivos compilados
+    "rootDir": "./src",               // Carpeta raíz de los archivos TypeScript
+    "strict": true,                   // Habilita todas las verificaciones de tipo estrictas
+    "esModuleInterop": true,          // Habilita la interoperabilidad entre CommonJS y módulos ES
+    "skipLibCheck": true              // Omite la comprobación de tipos de archivos de declaración
+  },
+  "include": ["src/**/*.ts", "src/middleware/error.js"],         // Archivos a incluir en la compilación
+  "exclude": ["node_modules"]         // Archivos a excluir de la compilación
+}
