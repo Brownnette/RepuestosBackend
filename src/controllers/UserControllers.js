@@ -43,17 +43,17 @@ exports.buscarUser = async(req, res) => {
 
 
 exports.registrarUser = async(req, res) => {
-    const { user, password } = req.body;
+    const { user, password,email } = req.body;
 
-    const sql = 'INSERT INTO usuario ("user", password) VALUES ($1, $2)';
+    const sql = 'INSERT INTO usuario ("user", "password","email" ) VALUES ($1, $2, $3)';
 
     // Ejecuta la consulta
-    const respuesta= await db.query(sql, [user, password], (err, result) => {
+    const respuesta= await db.query(sql, [user, password,email], (err, result) => {
         if (err) {
             console.error('Error al registrar el usuario:', err);
             return res.status(500).json('Error al registrar el usuario');
         }
-        res.status(200).json('El repuesto ha sido registrado');
+        res.status(200).json('El usuario ha sido registrado');
     });
 };
 

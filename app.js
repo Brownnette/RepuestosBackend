@@ -1,16 +1,19 @@
 const express = require ('express');
+const {errorHandler} = require ('./src/middleware/error')
 const dotenv = require('dotenv');
-const cors = require('cors');  // Asegúrate de instalar y usar el paquete cors
+const cors = require('cors');  
 const repuestosRoutes = require ('./src/routes/RepuestosRoutes');
 const userRoutes = require ('./src/routes/UserRoutes');
 
 
 
-dotenv.config();
+require('dotenv').config();
 
 const app =express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+app.use(errorHandler);
+
 app.use('/repuestos', repuestosRoutes);
 app.use('/users', userRoutes); ;
 
