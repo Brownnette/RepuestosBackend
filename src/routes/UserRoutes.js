@@ -29,7 +29,7 @@ app.post('users/login', (req, res) => {
 router.post('/login', userController.generateToken);
 router.get('/listarUser',authenticateToken,userController.listarUser)
 router.get('/buscarUser/:id',authenticateToken,userController.buscarUser)
-router.post('/registrarUser/',authenticateToken,userController.registrarUser)
+router.post('/registrarUser/',userController.registrarUser)
 router.delete('/eliminarUser/:id',authenticateToken, userController.eliminarUser);
 router.put('/actualizarUser/:id',authenticateToken, userController.actualizarUser);
 

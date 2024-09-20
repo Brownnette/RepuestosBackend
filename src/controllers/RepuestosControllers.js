@@ -2,12 +2,12 @@ const db = require('../Config/db')
 
 //Repuestos
 exports.registrar = async(req, res) => {
-    const { nombre, precio, productID } = req.body;
+    const { name, price, id } = req.body;
 
-    const sql = "INSERT INTO repuestos (nombre, precio, product_id) VALUES ($1, $2, $3)";
+    const sql = 'INSERT INTO repuestos ("nombre", "precio", "product_id") VALUES ($1, $2, $3)';
 
     // Ejecuta la consulta
-    const respuesta= await db.query(sql, [nombre, precio, productID], (err, result) => {
+    const respuesta= await db.query(sql, [name, price, id], (err, result) => {
         if (err) {
             console.error('Error al registrar el usuario:', err);
             return res.status(500).json('Error al registrar el usuario');

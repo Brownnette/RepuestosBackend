@@ -8,6 +8,6 @@
     "esModuleInterop": true,          // Habilita la interoperabilidad entre CommonJS y módulos ES
     "skipLibCheck": true              // Omite la comprobación de tipos de archivos de declaración
   },
-  "include": ["src/**/*.ts", "src/middleware/error.js"],         // Archivos a incluir en la compilación
+  "include": ["src/**/*.ts", "src/middleware/error.js", "src/Config/db.js"],         // Archivos a incluir en la compilación
   "exclude": ["node_modules"]         // Archivos a excluir de la compilación
 }

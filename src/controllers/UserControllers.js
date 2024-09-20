@@ -1,7 +1,8 @@
 
-
-const { password, user } = require('pg/lib/defaults');
 const db = require('../Config/db')
+require(`dotenv`);
+require('jsonwebtoken');
+
 
 /* User*/
 //users
@@ -43,12 +44,12 @@ exports.buscarUser = async(req, res) => {
 
 
 exports.registrarUser = async(req, res) => {
-    const { user, password,email } = req.body;
+    const { new_user, new_password,new_email } = req.body;
 
     const sql = 'INSERT INTO usuario ("user", "password","email" ) VALUES ($1, $2, $3)';
 
     // Ejecuta la consulta
-    const respuesta= await db.query(sql, [user, password,email], (err, result) => {
+    const respuesta= await db.query(sql, [new_user, new_password,new_email], (err, result) => {
         if (err) {
             console.error('Error al registrar el usuario:', err);
             return res.status(500).json('Error al registrar el usuario');
@@ -98,15 +99,22 @@ exports.actualizarUser = async (req, res) => {
 
 
 /* Token*/
-
-require(`dotenv`);
-require('jsonwebtoken');
-
 exports.generateToken = async(req, res) => {
-    const { userName, password } = req.body;
-    const user = {name: userName};
-    const accessToken = jwt.sign(user,`${process.env.CLAVE_JWT}`, {expiresIn: '1h'});
-    res.status(200).json({accessToken});
+    const { user, password } = req.body;
+    const sql = 'SELECT * FROM usuario where "user"= $1';
+    const respuesta= await db.query(sql, [user]);
+        if (respuesta.rows==0 ){
+            return res.status(404).json({mensaje:'usuario no encontrado'})
+        }
+        console.log (respuesta);
+        console.log(user);
+        console.log(password)
+        const resultado = respuesta.rows[0];
+        if (resultado['password'] == password){
+            const accessToken = jwt.sign({user:resultado['id']},`${process.env.CLAVE_JWT}`, {expiresIn: '1h'});
+            return res.status(200).json({accessToken});
+        }
+        return res.status(404).json({mensaje:'usuario no encontrado'})
 };
 
 
