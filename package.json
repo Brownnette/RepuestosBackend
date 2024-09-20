@@ -6,7 +6,7 @@
     "start": "node app.js",
     "build":"echo \" No se requiere \"",
     "vercel-build":"npm install",
-    "check-pg":"nom list pg"
+    "check-pg":"npm list pg"
   },
   "keywords": [],
   "author": "",

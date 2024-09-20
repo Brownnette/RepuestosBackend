@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');  
 const repuestosRoutes = require ('./src/routes/RepuestosRoutes');
 const userRoutes = require ('./src/routes/UserRoutes');
-
+const {Client} = require('pg');
 
 
 require('dotenv').config();
